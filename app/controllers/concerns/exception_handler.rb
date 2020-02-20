@@ -10,9 +10,7 @@ module ExceptionHandler
       json_response({ message: e.message }, :unprocessable_entity)
     end
 
-    rescue_from ActiveRecord::BadRequest do |e|
-      json_response({ message: e.message }, :bad_request)
-    end
+  
   end
 
 end

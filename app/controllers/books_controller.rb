@@ -3,11 +3,11 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-    json_response(@books)
+    render json: @books, except: [:created_at, :updated_at], status: :ok
   end
 
   def show
-    json_response(@book)
+    render json: @book, except: [:created_at, :updated_at], status: :ok
   end
 
   def create 
@@ -26,7 +26,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    head :no_content
+    render json: { message: 'Succesfull deletion' }, status: :ok
   end
 
   private
