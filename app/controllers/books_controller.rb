@@ -20,9 +20,8 @@ class BooksController < ApplicationController
   def update
     @book.update_attributes(book_params)
     if @book.save
-      json_response(@book)
+      render json: @book, only: [:id, :title, :category], status: :ok 
     end
-    head :no_content
   end
 
   def destroy
@@ -33,10 +32,11 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:user).permit(:title, :category)
+      params.require(:book).permit(:title, :category)
     end
 
     def set_book
-      @book = Book.find_by(id: params[:id])
+      # We want to run an exception. That is way find instead of find_by
+      @book = Book.find(params[:id])
     end
 end
