@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :update, :destroy]
 
-  def index 
+  def index
     @books = Book.all
     json_response(@books)
   end
@@ -33,7 +33,7 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.permit(:title, :category)
+      params.require(:user).permit(:title, :category)
     end
 
     def set_book
