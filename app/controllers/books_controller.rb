@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   def create 
     @book = Book.new(book_params)
     if @book.save
-      json_response(@book)
+      render json: @book, except: [:created_at, :updated_at], status: :ok
     end
   end
 
